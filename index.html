@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CNS — EOD Report</title>
+<title>CNS -- EOD Report</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,Helvetica,sans-serif;background:#E8EEF2;color:#222;font-size:13px;line-height:1.5}
@@ -20,7 +20,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#E8EEF2;color:#222;font-s
 .toolbar{background:#0F2B37;padding:9px 28px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid #1A3A4A}
 .tb-info{font-size:11px;color:#7A9DAD;flex:1}
 .save-st{font-size:11px;color:#5A8A9A;min-width:90px}
-.btn{padding:6px 16px;border-radius:3px;font-size:11px;font-weight:bold;cursor:pointer;border:none;letter-spacing:.04em}
+.btn{padding:7px 18px;border-radius:3px;font-size:12px;font-weight:bold;cursor:pointer;border:none;letter-spacing:.04em}
 .btn-send{background:#29749C;color:#fff}
 .btn-send:hover{background:#1E5C7A}
 .btn-reset{background:transparent;color:#7A9DAD;border:1px solid #2A4A5A}
@@ -41,24 +41,19 @@ body{font-family:Arial,Helvetica,sans-serif;background:#E8EEF2;color:#222;font-s
 table{width:100%;border-collapse:collapse;font-size:12px}
 th{background:#EAF3F9;padding:6px 8px;font-size:11px;font-weight:bold;color:#0F2B37;text-align:left;border:1px solid #D6E8F2}
 td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
-.rl{color:#444;font-weight:normal}
+.rl{color:#444}
 .frow{display:flex;gap:8px;margin-bottom:10px}
 .fbox{flex:1;padding:12px 10px;text-align:center;border:1px solid #E0E8EE;border-radius:3px}
 .flbl{font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
 .fval{font-size:20px;font-weight:bold}
 .ar-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .orow{display:flex;margin-bottom:4px;border:1px solid #E8EEF3;border-radius:3px;overflow:hidden}
-.obadge{width:82px;min-width:82px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;padding:7px 4px;text-align:center;cursor:pointer;user-select:none;letter-spacing:.03em}
-.otitle{flex:1.2;padding:5px 8px}
-.onotes{flex:2;padding:5px 8px;border-left:1px solid #E8EEF3}
-.b-urgent{background:#FCEBEB;color:#791F1F}
-.b-action{background:#FAEEDA;color:#633806}
-.b-info{background:#D6E8F2;color:#0F2B37}
-.b-resolved{background:#EAF3DE;color:#27500A}
-.b-monitor{background:#F1EFE8;color:#555}
+.obadge{width:82px;min-width:82px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;padding:7px 4px;text-align:center;cursor:pointer;user-select:none}
+.otitle{flex:1.2;padding:5px 8px}.onotes{flex:2;padding:5px 8px;border-left:1px solid #E8EEF3}
+.b-urgent{background:#FCEBEB;color:#791F1F}.b-action{background:#FAEEDA;color:#633806}
+.b-info{background:#D6E8F2;color:#0F2B37}.b-resolved{background:#EAF3DE;color:#27500A}.b-monitor{background:#F1EFE8;color:#555}
 .ohint{font-size:10px;color:#bbb;font-style:italic;margin-top:4px}
-.two-col{display:flex;gap:14px}
-.two-col>div{flex:1}
+.two-col{display:flex;gap:14px}.two-col>div{flex:1}
 .foot{background:#0F2B37;padding:12px 28px;display:flex;align-items:center;gap:16px}
 .foot-logo{height:28px;opacity:.65}
 .foot-text p{font-size:11px;color:#A8C8DC;line-height:1.7}
@@ -79,18 +74,22 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
       </div>
     </div>
     <div class="hdr-right">
-      <div class="fi" id="rpt-date" contenteditable="true" data-ph="Day, Mon DD YYYY" style="color:#fff;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);font-size:13px;font-weight:bold;min-width:130px;"></div>
-      <div style="font-size:10px;color:#A8C8DC;margin-top:4px;text-align:right;">End of Day Report</div>
+      <div id="f-date" class="fi" contenteditable="true" data-ph="Day, Mon DD YYYY"
+        style="color:#fff;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);font-size:13px;font-weight:bold;min-width:140px;"></div>
+      <div style="font-size:10px;color:#A8C8DC;margin-top:4px;">End of Day Report</div>
     </div>
   </div>
   <div class="hdr-bar">
-    <span class="hdr-bar-left">Status: &nbsp;<span class="fi" contenteditable="true" data-ph="NORMAL OPERATIONS / WATCH / ALERT" style="font-weight:bold;color:#0F2B37;"></span></span>
+    <span class="hdr-bar-left">Status:&nbsp;
+      <span id="f-status" class="fi" contenteditable="true" data-ph="NORMAL OPERATIONS / WATCH / ALERT"
+        style="font-weight:bold;color:#0F2B37;min-width:180px;"></span>
+    </span>
     <span class="hdr-bar-right">Cap: 40 curr &nbsp;&middot;&nbsp; 56 full</span>
   </div>
 </div>
 
 <div class="toolbar">
-  <span class="tb-info">Fill gold fields below &rarr; Save draft &rarr; Send Email</span>
+  <span class="tb-info">Fill gold fields &rarr; Save draft &rarr; Send Email</span>
   <span class="save-st" id="ss"></span>
   <button class="btn btn-save" onclick="saveDraft()">Save draft (Ctrl+S)</button>
   <button class="btn btn-reset" onclick="resetForm()">Reset</button>
@@ -101,7 +100,7 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
 
   <div class="section">
     <div class="stitle">Today&rsquo;s headline</div>
-    <div class="fb" contenteditable="true" data-ph="[One or two sentences — the most important thing leadership needs to know today]"></div>
+    <div id="f-headline" class="fb" contenteditable="true" data-ph="One or two sentences -- the most important thing leadership needs to know today"></div>
   </div>
 
   <div class="section">
@@ -109,23 +108,23 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
     <div class="mrow">
       <div class="mbox" style="background:#D6E8F2;border-top:4px solid #29749C;">
       <div class="mlbl" style="color:#29749C;">Office visits</div>
-      <div class="mval fi" contenteditable="true" data-ph="—" style="color:#0F2B37;font-size:22px;font-weight:bold;min-width:50px;text-align:center;"></div>
+      <div id="f-off" class="fval fi" contenteditable="true" data-ph="--" style="color:#0F2B37;min-width:50px;text-align:center;"></div>
     </div>
       <div class="mbox" style="background:#D6E8F2;border-top:4px solid #29749C;">
       <div class="mlbl" style="color:#29749C;">New patients</div>
-      <div class="mval fi" contenteditable="true" data-ph="—" style="color:#0F2B37;font-size:22px;font-weight:bold;min-width:50px;text-align:center;"></div>
+      <div id="f-np" class="fval fi" contenteditable="true" data-ph="--" style="color:#0F2B37;min-width:50px;text-align:center;"></div>
     </div>
       <div class="mbox" style="background:#D6E8F2;border-top:4px solid #29749C;">
       <div class="mlbl" style="color:#29749C;">Follow-ups</div>
-      <div class="mval fi" contenteditable="true" data-ph="—" style="color:#0F2B37;font-size:22px;font-weight:bold;min-width:50px;text-align:center;"></div>
+      <div id="f-fu" class="fval fi" contenteditable="true" data-ph="--" style="color:#0F2B37;min-width:50px;text-align:center;"></div>
     </div>
       <div class="mbox" style="background:#FAEEDA;border-top:4px solid #BA7517;">
       <div class="mlbl" style="color:#BA7517;">Sleep / Ovnt studies</div>
-      <div class="mval fi" contenteditable="true" data-ph="—" style="color:#633806;font-size:22px;font-weight:bold;min-width:50px;text-align:center;"></div>
+      <div id="f-ovnt" class="fval fi" contenteditable="true" data-ph="--" style="color:#633806;min-width:50px;text-align:center;"></div>
     </div>
       <div class="mbox" style="background:#F5F5F5;border-top:4px solid #888;">
       <div class="mlbl" style="color:#888;">% curr cap</div>
-      <div class="mval fi" contenteditable="true" data-ph="—" style="color:#444;font-size:22px;font-weight:bold;min-width:50px;text-align:center;"></div>
+      <div id="f-pct" class="fval fi" contenteditable="true" data-ph="--" style="color:#444;min-width:50px;text-align:center;"></div>
     </div>
     </div>
   </div>
@@ -133,12 +132,25 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
   <div class="section">
     <div class="stitle">Session breakdown</div>
     <table>
-      <thead><tr><th style="width:20%">Session</th><th style="width:9%">NP</th><th style="width:9%">FU</th><th style="width:9%">Total</th><th style="width:16%">Provider</th><th>Notes</th></tr></thead>
+      <thead><tr><th style="width:20%">Session</th><th style="width:9%">NP</th>
+        <th style="width:9%">FU</th><th style="width:9%">Total</th>
+        <th style="width:16%">Provider</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td class="rl">Morning (AM)</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[Dr.]" style="min-width:70px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:120px;"></span></td></tr>
-        <tr><td class="rl">Afternoon (PM)</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[Dr.]" style="min-width:70px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:120px;"></span></td></tr>
+        <tr><td class="rl">Morning (AM)</td>
+          <td><span id="f-am-np" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-am-fu" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td>
+          <td><span id="f-am-tot" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-am-pv" class="fi" contenteditable="true" data-ph="[Dr.]" style="min-width:70px;"></span></td>
+          <td><span id="f-am-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:120px;"></span></td></tr>
+        <tr><td class="rl">Afternoon (PM)</td>
+          <td><span id="f-pm-np" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-pm-fu" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td>
+          <td><span id="f-pm-tot" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-pm-pv" class="fi" contenteditable="true" data-ph="[Dr.]" style="min-width:70px;"></span></td>
+          <td><span id="f-pm-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:120px;"></span></td></tr>
         
-        <tr><td class="rl">Overnight studies</td><td style="color:#bbb;text-align:center;">—</td><td style="color:#bbb;text-align:center;">—</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td style="color:#bbb;">—</td><td><span class="fi" contenteditable="true" data-ph="[HST/PSG/MSLT/CPAP]" style="min-width:140px;"></span></td></tr>
+        <tr><td class="rl">Overnight studies</td>
+          <td style="color:#bbb;text-align:center;">--</td>
+          <td style="color:#bbb;text-align:center;">--</td>
+          <td><span id="f-ov-tot" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td>
+          <td style="color:#bbb;">--</td>
+          <td><span id="f-ov-n" class="fi" contenteditable="true" data-ph="[HST/PSG/MSLT/CPAP]" style="min-width:140px;"></span></td></tr>
       </tbody>
     </table>
   </div>
@@ -148,12 +160,12 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
     <table>
       <thead><tr><th style="width:50%">Metric</th><th style="width:14%">Count</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td class="rl">Tomorrow&rsquo;s scheduled visits</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
-        <tr><td class="rl">This week to date</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
-        <tr><td class="rl">Open slots — next 7 days</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
-        <tr><td class="rl">Cancellations today</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
-        <tr><td class="rl">Bumped / rescheduled today</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
-        <tr><td class="rl">Tonight&rsquo;s studies</td><td><span class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span class="fi" contenteditable="true" data-ph="[HST/PSG/MSLT/CPAP]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">Tomorrow&rsquo;s scheduled visits</td><td><span id="f-tmr" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-tmr-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">This week to date</td><td><span id="f-wtd" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-wtd-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">Open slots -- next 7 days</td><td><span id="f-opn" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-opn-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">Cancellations today</td><td><span id="f-cx" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-cx-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">Bumped / rescheduled today</td><td><span id="f-bmp" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-bmp-n" class="fi" contenteditable="true" data-ph="[note]" style="min-width:160px;"></span></td></tr>
+        <tr><td class="rl">Tonight&rsquo;s studies</td><td><span id="f-ton" class="fi" contenteditable="true" data-ph="##" style="min-width:60px;"></span></td><td><span id="f-ton-n" class="fi" contenteditable="true" data-ph="[HST/PSG/MSLT/CPAP]" style="min-width:160px;"></span></td></tr>
       </tbody>
     </table>
   </div>
@@ -161,31 +173,40 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
   <div class="section">
     <div class="stitle">Provider status</div>
     <table>
-      <thead><tr><th style="width:28%">Provider</th><th style="width:20%">Specialty</th><th style="width:22%">Status</th><th>Note</th></tr></thead>
+      <thead><tr><th style="width:28%">Provider</th><th style="width:20%">Specialty</th>
+        <th style="width:22%">Status</th><th>Note</th></tr></thead>
       <tbody>
 <tr>
-  <td><span class="fi" contenteditable="true" data-ph="[Dr. Name — KMS]" style="min-width:120px;"></span></td>
+  <td><span id="f-p1-n" class="fi" contenteditable="true" data-ph="[Dr. Name -- KMS]" style="min-width:120px;"></span></td>
   <td>Attending</td>
-  <td><span class="fi" contenteditable="true" data-ph="In office / Out / Locum" style="min-width:120px;"></span></td>
-  <td><span class="fi" contenteditable="true" data-ph="[note or —]" style="min-width:100px;"></span></td>
+  <td><span id="f-p1-s" class="fi" contenteditable="true" data-ph="In office / Out / Locum" style="min-width:130px;"></span></td>
+  <td><span id="f-p1-note" class="fi" contenteditable="true" data-ph="[note or --]" style="min-width:100px;"></span></td>
 </tr>
 <tr>
-  <td><span class="fi" contenteditable="true" data-ph="[Dr. Name — JBG]" style="min-width:120px;"></span></td>
+  <td><span id="f-p2-n" class="fi" contenteditable="true" data-ph="[Dr. Name -- JBG]" style="min-width:120px;"></span></td>
   <td>Attending</td>
-  <td><span class="fi" contenteditable="true" data-ph="In office / Out / Locum" style="min-width:120px;"></span></td>
-  <td><span class="fi" contenteditable="true" data-ph="[note or —]" style="min-width:100px;"></span></td>
+  <td><span id="f-p2-s" class="fi" contenteditable="true" data-ph="In office / Out / Locum" style="min-width:130px;"></span></td>
+  <td><span id="f-p2-note" class="fi" contenteditable="true" data-ph="[note or --]" style="min-width:100px;"></span></td>
 </tr></tbody>
     </table>
-    <p style="font-size:10px;color:#bbb;font-style:italic;margin-top:4px;">Options: In office &nbsp;&middot;&nbsp; Out of office &nbsp;&middot;&nbsp; Locum covering &nbsp;&middot;&nbsp; On leave &nbsp;&middot;&nbsp; Credentialing hold &nbsp;&middot;&nbsp; Partial day</p>
+    <p style="font-size:10px;color:#bbb;font-style:italic;margin-top:4px;">Options: In office &nbsp;&middot;&nbsp; Out of office &nbsp;&middot;&nbsp; Locum covering &nbsp;&middot;&nbsp; On leave &nbsp;&middot;&nbsp; Credentialing hold</p>
   </div>
 
   <div class="section">
     <div class="stitle">Operational items</div>
-    <div class="orow"><div class="obadge b-urgent" onclick="cyc(this)">URGENT</div><div class="otitle fi" contenteditable="true" data-ph="Item title"></div><div class="onotes fi" contenteditable="true" data-ph="Description / owner / deadline"></div></div>
-    <div class="orow"><div class="obadge b-action" onclick="cyc(this)">ACTION</div><div class="otitle fi" contenteditable="true" data-ph="Item title"></div><div class="onotes fi" contenteditable="true" data-ph="Description / owner"></div></div>
-    <div class="orow"><div class="obadge b-info" onclick="cyc(this)">INFO</div><div class="otitle fi" contenteditable="true" data-ph="Item title"></div><div class="onotes fi" contenteditable="true" data-ph="Description"></div></div>
-    <div class="orow"><div class="obadge b-resolved" onclick="cyc(this)">RESOLVED</div><div class="otitle fi" contenteditable="true" data-ph="Item title"></div><div class="onotes fi" contenteditable="true" data-ph="What was resolved"></div></div>
-    <p class="ohint">Click a badge to cycle: URGENT &rarr; ACTION &rarr; INFO &rarr; RESOLVED &rarr; MONITOR &nbsp;&middot;&nbsp; Leave blank to omit from email</p>
+    <div class="orow"><div class="obadge b-urgent" onclick="cyc(this)">URGENT</div>
+      <div class="otitle fi" contenteditable="true" data-ph="Item title"></div>
+      <div class="onotes fi" contenteditable="true" data-ph="Description / owner / deadline"></div></div>
+    <div class="orow"><div class="obadge b-action" onclick="cyc(this)">ACTION</div>
+      <div class="otitle fi" contenteditable="true" data-ph="Item title"></div>
+      <div class="onotes fi" contenteditable="true" data-ph="Description / owner"></div></div>
+    <div class="orow"><div class="obadge b-info" onclick="cyc(this)">INFO</div>
+      <div class="otitle fi" contenteditable="true" data-ph="Item title"></div>
+      <div class="onotes fi" contenteditable="true" data-ph="Description"></div></div>
+    <div class="orow"><div class="obadge b-resolved" onclick="cyc(this)">RESOLVED</div>
+      <div class="otitle fi" contenteditable="true" data-ph="Item title"></div>
+      <div class="onotes fi" contenteditable="true" data-ph="What was resolved"></div></div>
+    <p class="ohint">Click badge to cycle: URGENT &rarr; ACTION &rarr; INFO &rarr; RESOLVED &rarr; MONITOR &nbsp;&middot;&nbsp; Leave blank to omit</p>
   </div>
 
   <div class="section">
@@ -193,57 +214,65 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
     <div class="frow">
       <div class="fbox" style="background:#D6E8F2;border-top:3px solid #29749C;">
         <div class="flbl" style="color:#29749C;">Billed today</div>
-        <div class="fval fi" contenteditable="true" data-ph="$0,000" style="color:#0F2B37;"></div>
+        <div id="f-billed" class="fval fi" contenteditable="true" data-ph="$0,000" style="color:#0F2B37;"></div>
         <div style="font-size:10px;color:#888;margin-top:3px;">Charges submitted</div>
       </div>
       <div class="fbox" style="background:#EAF3DE;border-top:3px solid #3B6D11;">
         <div class="flbl" style="color:#27500A;">Payments received</div>
-        <div class="fval fi" contenteditable="true" data-ph="$0,000" style="color:#173404;"></div>
+        <div id="f-paid" class="fval fi" contenteditable="true" data-ph="$0,000" style="color:#173404;"></div>
         <div style="font-size:10px;color:#888;margin-top:3px;">Posted today</div>
       </div>
       <div class="fbox" style="background:#FAEEDA;border-top:3px solid #BA7517;">
         <div class="flbl" style="color:#633806;">AR outstanding</div>
-        <div class="fval fi" contenteditable="true" data-ph="$00,000" style="color:#412402;"></div>
+        <div id="f-ar" class="fval fi" contenteditable="true" data-ph="$00,000" style="color:#412402;"></div>
         <div style="font-size:10px;color:#888;margin-top:3px;">Total open balance</div>
       </div>
     </div>
     <table>
-      <thead><tr><th colspan="2">AR aging</th><th style="text-align:right;">Amount</th><th style="text-align:right;">% of AR</th></tr></thead>
+      <thead><tr><th colspan="2">AR aging</th>
+        <th style="text-align:right;">Amount</th><th style="text-align:right;">% of AR</th></tr></thead>
       <tbody>
-        <tr><td style="width:14px;padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#29749C;"></span></td><td>0&ndash;30 days</td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
-        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#97C459;"></span></td><td>31&ndash;60 days</td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
-        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#EF9F27;"></span></td><td>61&ndash;90 days</td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
-        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#E24B4A;"></span></td><td>90+ days</td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
+        <tr><td style="width:14px;padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#29749C;"></span></td>
+          <td>0-30 days</td><td style="text-align:right;"><span id="f-ar1" class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span id="f-ar1p" class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
+        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#97C459;"></span></td>
+          <td>31-60 days</td><td style="text-align:right;"><span id="f-ar2" class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span id="f-ar2p" class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
+        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#EF9F27;"></span></td>
+          <td>61-90 days</td><td style="text-align:right;"><span id="f-ar3" class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span id="f-ar3p" class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
+        <tr><td style="padding:5px 4px 5px 8px;"><span class="ar-dot" style="background:#E24B4A;"></span></td>
+          <td>90+ days</td><td style="text-align:right;"><span id="f-ar4" class="fi" contenteditable="true" data-ph="$0,000" style="min-width:60px;"></span></td><td style="text-align:right;"><span id="f-ar4p" class="fi" contenteditable="true" data-ph="##%" style="min-width:60px;"></span></td></tr>
       </tbody>
     </table>
     <div style="margin-top:8px;">
       <span style="font-size:11px;font-weight:bold;color:#555;">Financial notes:&nbsp;</span>
-      <div class="fb" contenteditable="true" data-ph="[Any billing/collections context today. Or: No issues to report.]"></div>
+      <div id="f-fin-n" class="fb" contenteditable="true" data-ph="Any billing/collections context today. Or: No issues to report."></div>
     </div>
   </div>
 
   <div class="section">
     <div class="stitle">Credentialing &nbsp;&middot;&nbsp; Billing &nbsp;&middot;&nbsp; Compliance</div>
     <div class="two-col">
-      <div><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Credentialing</p><div class="fb" contenteditable="true" data-ph="[Active items — provider, payer, status. Or "No active items."]"></div></div>
-      <div><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Billing / Denials</p><div class="fb" contenteditable="true" data-ph="[Denial batches, appeal deadlines, billing flags. Or "No active items."]"></div></div>
+      <div><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Credentialing</p>
+        <div id="f-cred" class="fb" contenteditable="true" data-ph="Active items -- provider, payer, status. Or: No active items."></div></div>
+      <div><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Billing / Denials</p>
+        <div id="f-bill" class="fb" contenteditable="true" data-ph="Denial batches, appeal deadlines, billing flags. Or: No active items."></div></div>
     </div>
-    <div style="margin-top:8px;"><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Compliance / AASM</p><div class="fb" contenteditable="true" data-ph="[AASM accreditation, HIPAA, payer audits. Or "No active items."]"></div></div>
+    <div style="margin-top:8px;"><p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Compliance / AASM</p>
+      <div id="f-comp" class="fb" contenteditable="true" data-ph="AASM accreditation, HIPAA, payer audits. Or: No active items."></div></div>
   </div>
 
   <div class="section">
-    <div class="stitle">Forward look &mdash; next 48&ndash;72 hours</div>
+    <div class="stitle">Forward look -- next 48-72 hours</div>
     <p style="font-size:11px;font-weight:bold;color:#555;margin-bottom:4px;">Known schedule risks</p>
-    <div class="fb" contenteditable="true" data-ph="[E.g.: Provider out Thursday — coverage TBD. Or: None identified.]"></div>
+    <div id="f-risks" class="fb" contenteditable="true" data-ph="E.g.: Provider out Thursday -- coverage TBD. Or: None identified."></div>
     <p style="font-size:11px;font-weight:bold;color:#555;margin:8px 0 4px;">Pending decisions needed</p>
-    <div class="fb" contenteditable="true" data-ph="[Items requiring leadership response — who, what, by when. Or: None.]"></div>
+    <div id="f-pend" class="fb" contenteditable="true" data-ph="Items requiring leadership response -- who, what, by when. Or: None."></div>
     <p style="font-size:11px;font-weight:bold;color:#555;margin:8px 0 4px;">Thursday tracker update</p>
-    <div class="fb" contenteditable="true" data-ph="[Thursday: confirm tracker updated, note key changes. Other days: Tracker update due Thursday.]"></div>
+    <div id="f-track" class="fb" contenteditable="true" data-ph="Thursday: confirm tracker updated. Other days: Tracker update due Thursday."></div>
   </div>
 
   <div class="section">
     <div class="stitle">MSO / Operations notes <span style="font-weight:normal;font-style:italic;color:#ccc;">(leave blank to omit)</span></div>
-    <div class="fb" contenteditable="true" data-ph="[Staffing, vendor, facility, payer, DME, or Rhema management items. 2-4 sentences.]"></div>
+    <div id="f-mso" class="fb" contenteditable="true" data-ph="Staffing, vendor, facility, payer, or Rhema management items. 2-4 sentences."></div>
   </div>
 
 </div>
@@ -260,49 +289,73 @@ td{padding:5px 8px;border:1px solid #EAEFF3;vertical-align:middle}
 </div>
 <script>
 
-const SK = 'CNS_eod_v2';
-const BADGES = ['URGENT','ACTION','INFO','RESOLVED','MONITOR'];
-const BC = {URGENT:'b-urgent',ACTION:'b-action',INFO:'b-info',RESOLVED:'b-resolved',MONITOR:'b-monitor'};
+var SK = 'CNS_eod_v3';
+var BADGES = ['URGENT','ACTION','INFO','RESOLVED','MONITOR'];
+var BC = {URGENT:'b-urgent',ACTION:'b-action',INFO:'b-info',RESOLVED:'b-resolved',MONITOR:'b-monitor'};
 
 function cyc(el) {
-  const i = BADGES.indexOf(el.textContent.trim());
-  const n = BADGES[(i+1)%BADGES.length];
+  var i = BADGES.indexOf(el.textContent.trim());
+  var n = BADGES[(i+1) % BADGES.length];
   el.textContent = n;
   el.className = 'obadge ' + BC[n];
 }
 
-function fields() { return [...document.querySelectorAll('[contenteditable]')]; }
-
-function fv(el) {
-  const v = el.textContent.trim();
-  return (v && v !== el.dataset.ph) ? v : '';
+function g(id) {
+  var el = document.getElementById(id);
+  if (!el) return '[--]';
+  var v = el.textContent.trim();
+  return (v && v !== el.dataset.ph) ? v : '[--]';
 }
 
 function saveDraft() {
-  const d = {};
-  fields().forEach((el,i) => { d[i] = el.innerHTML; });
+  var d = {};
+  document.querySelectorAll('[contenteditable]').forEach(function(el) {
+    if (el.id) d[el.id] = el.innerHTML;
+  });
+  document.querySelectorAll('.obadge').forEach(function(el, i) {
+    d['badge-' + i] = el.textContent.trim();
+    d['badge-class-' + i] = el.className;
+  });
   try { localStorage.setItem(SK, JSON.stringify(d)); } catch(e) {}
-  const s = document.getElementById('ss');
+  var s = document.getElementById('ss');
   s.textContent = 'Saved ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  setTimeout(() => { s.textContent = ''; }, 3000);
+  setTimeout(function() { s.textContent = ''; }, 3000);
 }
 
 function loadDraft() {
   try {
-    const raw = localStorage.getItem(SK);
+    var raw = localStorage.getItem(SK);
     if (!raw) return;
-    const d = JSON.parse(raw);
-    fields().forEach((el,i) => { if (d[i] !== undefined) el.innerHTML = d[i]; });
+    var d = JSON.parse(raw);
+    Object.keys(d).forEach(function(k) {
+      if (k.startsWith('badge-class-')) {
+        var i = parseInt(k.replace('badge-class-',''));
+        var badges = document.querySelectorAll('.obadge');
+        if (badges[i]) badges[i].className = d[k];
+      } else if (k.startsWith('badge-')) {
+        var i = parseInt(k.replace('badge-',''));
+        var badges = document.querySelectorAll('.obadge');
+        if (badges[i]) badges[i].textContent = d[k];
+      } else {
+        var el = document.getElementById(k);
+        if (el) el.innerHTML = d[k];
+      }
+    });
   } catch(e) {}
 }
 
 function resetForm() {
   if (!confirm('Reset all fields to blank?')) return;
-  fields().forEach(el => { el.innerHTML = ''; });
+  document.querySelectorAll('[contenteditable]').forEach(function(el) { el.innerHTML = ''; });
+  document.querySelectorAll('.obadge').forEach(function(el, i) {
+    var defaults = ['URGENT','ACTION','INFO','RESOLVED'];
+    var cls = ['b-urgent','b-action','b-info','b-resolved'];
+    el.textContent = defaults[i] || 'INFO';
+    el.className = 'obadge ' + (cls[i] || 'b-info');
+  });
   try { localStorage.removeItem(SK); } catch(e) {}
-  const s = document.getElementById('ss');
-  s.textContent = 'Reset.';
-  setTimeout(() => { s.textContent = ''; }, 2000);
+  document.getElementById('ss').textContent = 'Reset.';
+  setTimeout(function() { document.getElementById('ss').textContent = ''; }, 2000);
 }
 
 setInterval(saveDraft, 60000);
@@ -310,76 +363,46 @@ document.addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveDraft(); }
 });
 
-function gv(el) {
-  var v = fv(el);
-  return v || '[—]';
-}
-
 function buildBody() {
-  var ff = fields();
-  var i = 0;
-  function nxt() { var v = ff[i] ? gv(ff[i]) : '[—]'; i++; return v; }
+  var date     = g('f-date');
+  var status   = g('f-status');
+  var headline = g('f-headline');
+  var offvis   = g('f-off');
+  var newpt    = g('f-np');
+  var followup = g('f-fu');
+  var ovnt     = g('f-ovnt');
+  var pct      = g('f-pct');
+  var amNP=g('f-am-np'), amFU=g('f-am-fu'), amTot=g('f-am-tot'), amPv=g('f-am-pv'), amN=g('f-am-n');
+  var pmNP=g('f-pm-np'), pmFU=g('f-pm-fu'), pmTot=g('f-pm-tot'), pmPv=g('f-pm-pv'), pmN=g('f-pm-n');
+  var ovTot=g('f-ov-tot'), ovN=g('f-ov-n');
+  var tmr=g('f-tmr'), wtd=g('f-wtd'), opn=g('f-opn'), cx=g('f-cx'), bmp=g('f-bmp'), ton=g('f-ton');
+  var tmrN=g('f-tmr-n'), wtdN=g('f-wtd-n'), opnN=g('f-opn-n'), cxN=g('f-cx-n'), bmpN=g('f-bmp-n'), tonN=g('f-ton-n');
+  var p1n=g('f-p1-n'), p1s=g('f-p1-s'), p1note=g('f-p1-note');
+  var p2n=g('f-p2-n'), p2s=g('f-p2-s'), p2note=g('f-p2-note');
+  var billed=g('f-billed'), paid=g('f-paid'), ar=g('f-ar');
+  var ar1=g('f-ar1'), ar1p=g('f-ar1p'), ar2=g('f-ar2'), ar2p=g('f-ar2p');
+  var ar3=g('f-ar3'), ar3p=g('f-ar3p'), ar4=g('f-ar4'), ar4p=g('f-ar4p');
+  var finN=g('f-fin-n');
+  var cred=g('f-cred'), bill=g('f-bill'), comp=g('f-comp');
+  var risks=g('f-risks'), pend=g('f-pend'), track=g('f-track');
+  var mso=g('f-mso');
+    var chestLine = null;
 
-  var date     = nxt();
-  var status   = nxt();
-  var headline = nxt();
-  var offvis   = nxt();
-  var newpt    = nxt();
-  var fu       = nxt();
-  var ovnt     = nxt();
-  var pct      = nxt();
-  var amNP=nxt(), amFU=nxt(), amTot=nxt(), amPv=nxt(), amN=nxt();
-  var pmNP=nxt(), pmFU=nxt(), pmTot=nxt(), pmPv=nxt(), pmN=nxt();
-  
-  var ovTot=nxt(), ovN=nxt();
-  var tmr=nxt(), wtd=nxt(), opn=nxt(), cx=nxt(), bmp=nxt(), ton=nxt();
-  var tmrN=nxt(), wtdN=nxt(), opnN=nxt(), cxN=nxt(), bmpN=nxt(), tonN=nxt();
-
-  // providers — read from DOM directly
-  var provLines = [];
-  var provTables = document.querySelectorAll('tbody');
-  if (provTables.length > 0) {
-    var provTbody = null;
-    provTables.forEach(function(tb) {
-      if (tb.closest('.section') && tb.closest('.section').querySelector('.stitle') &&
-          tb.closest('.section').querySelector('.stitle').textContent.indexOf('Provider') >= 0) {
-        provTbody = tb;
-      }
-    });
-    if (provTbody) {
-      provTbody.querySelectorAll('tr').forEach(function(r) {
-        var cells = r.querySelectorAll('td');
-        if (cells.length >= 3) {
-          var name = cells[0].textContent.trim() || '[—]';
-          var spec = cells[1].textContent.trim();
-          var stat = cells[2].textContent.trim() || '[—]';
-          var note = cells[3] ? cells[3].textContent.trim() : '';
-          provLines.push('  ' + name + ' (' + spec + '): ' + stat + (note ? ' — ' + note : ''));
-        }
-      });
-    }
-  }
-
-  // ops — read badges + titles + notes from DOM
   var opsLines = [];
   document.querySelectorAll('.orow').forEach(function(r) {
     var badge = r.querySelector('.obadge').textContent.trim();
-    var title = r.querySelector('.otitle').textContent.trim();
-    var notes = r.querySelector('.onotes').textContent.trim();
-    if (title && title !== r.querySelector('.otitle').dataset.ph) {
-      opsLines.push('  [' + badge + '] ' + title + (notes && notes !== r.querySelector('.onotes').dataset.ph ? ' — ' + notes : ''));
+    var titleEl = r.querySelector('.otitle');
+    var notesEl = r.querySelector('.onotes');
+    var title = titleEl.textContent.trim();
+    var notes = notesEl.textContent.trim();
+    var titlePh = titleEl.dataset.ph || '';
+    if (title && title !== titlePh) {
+      opsLines.push('  [' + badge + '] ' + title + (notes && notes !== (notesEl.dataset.ph||'') ? ' -- ' + notes : ''));
     }
   });
 
-  var billed=nxt(), paid=nxt(), ar=nxt();
-  var ar1=nxt(), ar1p=nxt(), ar2=nxt(), ar2p=nxt();
-  var ar3=nxt(), ar3p=nxt(), ar4=nxt(), ar4p=nxt();
-  var finN=nxt();
-  var cred=nxt(), bill=nxt(), comp=nxt();
-  var risks=nxt(), pend=nxt(), track=nxt(), mso=nxt();
-
   var lines = [
-    'CNS — END OF DAY REPORT',
+    'CNS -- END OF DAY REPORT',
     'Date: ' + date + '  |  Status: ' + status,
     'Capacity: 40 current / 56 full',
     '',
@@ -387,78 +410,80 @@ function buildBody() {
     headline,
     '',
     "TODAY'S VOLUME",
-    '  Office visits: ' + offvis + '  |  New patients: ' + newpt + '  |  Follow-ups: ' + fu + '  |  Sleep/Ovnt: ' + ovnt + '  |  % cap: ' + pct,
+    '  Office visits: '+ offvis +'  New patients: '+ newpt +'  Follow-ups: '+ followup +'  Sleep/Ovnt: '+ ovnt +'  % cap: '+ pct,
     '',
     'SESSION BREAKDOWN',
-    '  Morning:    NP ' + amNP + '  FU ' + amFU + '  Total ' + amTot + '  Provider: ' + amPv + '  — ' + amN,
-    '  Afternoon:  NP ' + pmNP + '  FU ' + pmFU + '  Total ' + pmTot + '  Provider: ' + pmPv + '  — ' + pmN,
+    '  Morning:    NP '+ amNP +'  FU '+ amFU +'  Total '+ amTot +'  Provider: '+ amPv +'  -- '+ amN,
+    '  Afternoon:  NP '+ pmNP +'  FU '+ pmFU +'  Total '+ pmTot +'  Provider: '+ pmPv +'  -- '+ pmN,
     
-    '  Overnight studies: Total ' + ovTot + '  — ' + ovN,
+    '  Overnight/Sleep: Total '+ ovTot +'  -- '+ ovN,
     '',
     'SCHEDULING PULSE',
-    '  Tomorrow:     ' + tmr  + '  (' + tmrN + ')',
-    '  Week to date: ' + wtd  + '  (' + wtdN + ')',
-    '  Open slots:   ' + opn  + '  (' + opnN + ')',
-    '  Cancellations:' + cx   + '  (' + cxN  + ')',
-    '  Bumped:       ' + bmp  + '  (' + bmpN + ')',
-    '  Tonight:      ' + ton  + '  (' + tonN + ')',
+    '  Tomorrow:     '+ tmr  +'  ('+ tmrN +')',
+    '  Week to date: '+ wtd  +'  ('+ wtdN +')',
+    '  Open slots:   '+ opn  +'  ('+ opnN +')',
+    '  Cancellations:'+ cx   +'  ('+ cxN  +')',
+    '  Bumped:       '+ bmp  +'  ('+ bmpN +')',
+    '  Tonight:      '+ ton  +'  ('+ tonN +')',
     '',
     'PROVIDER STATUS',
-  ].concat(provLines);
+    '  '+ p1n +': '+ p1s +' '+ p1note,
+    '  '+ p2n +': '+ p2s +' '+ p2note,
+  ];
 
   if (opsLines.length > 0) {
-    lines.push('', 'OPERATIONAL ITEMS');
-    lines = lines.concat(opsLines);
+    lines.push(''); lines.push('OPERATIONAL ITEMS');
+    opsLines.forEach(function(l) { lines.push(l); });
   }
 
-  lines = lines.concat([
-    '',
-    'DAILY FINANCIAL SUMMARY',
-    '  Billed today:       ' + billed,
-    '  Payments received:  ' + paid,
-    '  AR outstanding:     ' + ar,
+  lines.push(
+    '', 'DAILY FINANCIAL SUMMARY',
+    '  Billed today:       '+ billed,
+    '  Payments received:  '+ paid,
+    '  AR outstanding:     '+ ar,
     '  AR Aging:',
-    '    0-30 days:   ' + ar1  + ' (' + ar1p  + ')',
-    '    31-60 days:  ' + ar2  + ' (' + ar2p  + ')',
-    '    61-90 days:  ' + ar3  + ' (' + ar3p  + ')',
-    '    90+ days:    ' + ar4  + ' (' + ar4p  + ')',
-    '  Financial notes: ' + finN,
-    '',
-    'CREDENTIALING / BILLING / COMPLIANCE',
-    '  Credentialing:   ' + cred,
-    '  Billing/Denials: ' + bill,
-    '  Compliance/AASM: ' + comp,
-    '',
-    'FORWARD LOOK (48-72 HRS)',
-    '  Schedule risks:    ' + risks,
-    '  Pending decisions: ' + pend,
-    '  Thursday tracker:  ' + track,
-  ]);
+    '    0-30 days:   '+ ar1  +' ('+ ar1p +')',
+    '    31-60 days:  '+ ar2  +' ('+ ar2p +')',
+    '    61-90 days:  '+ ar3  +' ('+ ar3p +')',
+    '    90+ days:    '+ ar4  +' ('+ ar4p +')',
+    '  Financial notes: '+ finN,
+    '', 'CREDENTIALING / BILLING / COMPLIANCE',
+    '  Credentialing:   '+ cred,
+    '  Billing/Denials: '+ bill,
+    '  Compliance/AASM: '+ comp,
+    '', 'FORWARD LOOK (48-72 HRS)',
+    '  Schedule risks:    '+ risks,
+    '  Pending decisions: '+ pend,
+    '  Thursday tracker:  '+ track
+  );
 
-  var msoVal = fv(ff[i-1]);
-  if (msoVal) { lines.push('', 'MSO / OPERATIONS NOTES', '  ' + msoVal); }
+  if (mso !== '[--]') { lines.push('', 'MSO / OPERATIONS NOTES', '  '+ mso); }
 
   lines.push(
     '',
-    '—————————————————————————————————————————',
+    '-----------------------------------------',
     'Clinical Neurophysiology Services PC  |  Sterling Heights, MI',
-    'Rhema Management Group  ·  CONFIDENTIAL — Internal use only'
+    'Rhema Management Group  |  CONFIDENTIAL - Internal use only'
   );
 
   return lines.join('\n');
 }
 
 function sendEmail() {
-  var date = document.querySelector('#rpt-date').textContent.trim() || 'today';
-  var subj = encodeURIComponent('CNS EOD Report — ' + date);
-  var body;
+  var dateVal = document.getElementById('f-date');
+  var date = dateVal ? dateVal.textContent.trim() : 'today';
+  if (!date || date === (dateVal && dateVal.dataset.ph)) date = 'today';
+  var subj = encodeURIComponent('CNS EOD Report - ' + date);
+  var bodyText;
   try {
-    body = encodeURIComponent(buildBody());
-  } catch(e) {
-    alert('Error building email: ' + e.message);
+    bodyText = buildBody();
+  } catch(err) {
+    alert('Could not build email: ' + err.message);
     return;
   }
-  window.location.href = 'mailto:brian@rhemamanagementgroup.com?subject=' + subj + '&body=' + body;
+  var bodyEnc = encodeURIComponent(bodyText);
+  var mailto = 'mailto:brian@rhemamanagementgroup.com?subject=' + subj + '&body=' + bodyEnc;
+  window.location.href = mailto;
 }
 
 window.addEventListener('load', loadDraft);
