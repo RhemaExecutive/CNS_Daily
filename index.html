@@ -428,7 +428,7 @@ function sendEmail() {
   const date = document.querySelector('#rpt-date').textContent.trim() || 'today';
   const subj = encodeURIComponent(`CNS EOD Report — ${date}`);
   const body = encodeURIComponent(buildBody());
-  window.location.href = `mailto:?subject=${subj}&body=${body}`;
+  window.location.href = `mailto:brian@rhemamanagementgroup.com?subject=${subj}&body=${body}`;
 }
 
 window.addEventListener('load', loadDraft);
