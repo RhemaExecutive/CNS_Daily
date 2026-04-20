@@ -30,7 +30,6 @@ label{display:block;font-size:11px;font-weight:bold;color:#555;margin-bottom:3px
 input[type=text],textarea,select{width:100%;padding:7px 10px;border:1px solid #C9A84C;border-radius:3px;background:#FFF2CC;color:#5C3D00;font-family:Arial,Helvetica,sans-serif;font-size:13px;box-sizing:border-box}
 input[type=text]:focus,textarea:focus,select:focus{outline:none;border-color:#A07800;background:#FFFDE0}
 textarea{resize:vertical;min-height:50px}
-.row2{display:flex;gap:10px}.row2>div{flex:1}
 .mrow{display:flex;gap:8px;margin-bottom:4px}
 .mbox{flex:1;padding:10px 8px;text-align:center;border:1px solid #D6E8F2;border-radius:3px}
 .mbox label{font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
@@ -39,7 +38,7 @@ textarea{resize:vertical;min-height:50px}
 table{width:100%;border-collapse:collapse;font-size:12px}
 th{background:#EAF3F9;padding:6px 8px;font-size:11px;font-weight:bold;color:#0F2B37;text-align:left;border:1px solid #D6E8F2}
 td{padding:4px 6px;border:1px solid #EAEFF3;vertical-align:middle}
-td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
+td input,td select{padding:4px 6px;font-size:12px;min-height:28px}
 .frow{display:flex;gap:8px;margin-bottom:10px}
 .fbox{flex:1;padding:12px 10px;text-align:center;border:1px solid #E0E8EE;border-radius:3px}
 .fbox label{font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
@@ -79,6 +78,8 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
   <input type="hidden" name="botcheck" value="" style="display:none">
   <input type="hidden" name="practice" value="Clinical Neurophysiology Services PC">
   <input type="hidden" name="report_date" id="report-date">
+  <!-- HTML email body injected here before submit -->
+  <input type="hidden" name="message" id="email-html-body">
 
   <div class="hdr">
     <div class="hdr-top">
@@ -107,7 +108,7 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
   </div>
 
   <div class="toolbar">
-    <span class="tb-info">Complete the form below and click Submit &amp; Send to deliver the EOD report.</span>
+    <span class="tb-info">Complete below and click Submit &amp; Send to deliver the EOD report.</span>
     <button type="button" class="btn-reset" onclick="resetForNextDay()">Reset</button>
     <button type="submit" class="btn-submit" id="submit-btn">&#9993;&nbsp; Submit &amp; Send</button>
   </div>
@@ -210,21 +211,13 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
             <tr>
               <td><input type="text" name="prov1_name" placeholder="[Dr. Name]"></td>
               <td style="color:#444;">Attending -- KMS</td>
-              <td><select name="prov1_status">
-                <option>In office</option><option>Out of office</option>
-                <option>Locum covering</option><option>On leave</option>
-                <option>Credentialing hold</option><option>Partial day</option>
-              </select></td>
+              <td><select name="prov1_status"><option>In office</option><option>Out of office</option><option>Locum covering</option><option>On leave</option><option>Credentialing hold</option><option>Partial day</option></select></td>
               <td><input type="text" name="prov1_note" placeholder="[note or --]"></td>
             </tr>
             <tr>
               <td><input type="text" name="prov2_name" placeholder="[Dr. Name -- Attending -- JBG]"></td>
               <td style="color:#444;">Attending -- JBG</td>
-              <td><select name="prov2_status">
-                <option>In office</option><option>Out of office</option>
-                <option>Locum covering</option><option>On leave</option>
-                <option>Credentialing hold</option><option>Partial day</option>
-              </select></td>
+              <td><select name="prov2_status"><option>In office</option><option>Out of office</option><option>Locum covering</option><option>On leave</option><option>Credentialing hold</option><option>Partial day</option></select></td>
               <td><input type="text" name="prov2_note" placeholder="[note or --]"></td>
             </tr>
           </tbody>
@@ -238,26 +231,10 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
         <table>
           <thead><tr><th style="width:14%">Priority</th><th style="width:34%">Item title</th><th>Description / owner / deadline</th></tr></thead>
           <tbody>
-            <tr>
-              <td><select name="ops1_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option selected>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td>
-              <td><input type="text" name="ops1_title" placeholder="Item title (leave blank to omit)"></td>
-              <td><input type="text" name="ops1_notes" placeholder="Description / owner / deadline"></td>
-            </tr>
-            <tr>
-              <td><select name="ops2_badge" class="ops-sel"><option>URGENT</option><option selected>ACTION</option><option>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td>
-              <td><input type="text" name="ops2_title" placeholder="Item title (leave blank to omit)"></td>
-              <td><input type="text" name="ops2_notes" placeholder="Description / owner / deadline"></td>
-            </tr>
-            <tr>
-              <td><select name="ops3_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option selected>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td>
-              <td><input type="text" name="ops3_title" placeholder="Item title (leave blank to omit)"></td>
-              <td><input type="text" name="ops3_notes" placeholder="Description / owner / deadline"></td>
-            </tr>
-            <tr>
-              <td><select name="ops4_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option>INFO</option><option selected>RESOLVED</option><option>MONITOR</option></select></td>
-              <td><input type="text" name="ops4_title" placeholder="Item title (leave blank to omit)"></td>
-              <td><input type="text" name="ops4_notes" placeholder="Description / owner / deadline"></td>
-            </tr>
+            <tr><td><select name="ops1_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option selected>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td><td><input type="text" name="ops1_title" placeholder="Item title (leave blank to omit)"></td><td><input type="text" name="ops1_notes" placeholder="Description / owner / deadline"></td></tr>
+            <tr><td><select name="ops2_badge" class="ops-sel"><option>URGENT</option><option selected>ACTION</option><option>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td><td><input type="text" name="ops2_title" placeholder="Item title (leave blank to omit)"></td><td><input type="text" name="ops2_notes" placeholder="Description / owner / deadline"></td></tr>
+            <tr><td><select name="ops3_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option selected>INFO</option><option>RESOLVED</option><option>MONITOR</option></select></td><td><input type="text" name="ops3_title" placeholder="Item title (leave blank to omit)"></td><td><input type="text" name="ops3_notes" placeholder="Description / owner / deadline"></td></tr>
+            <tr><td><select name="ops4_badge" class="ops-sel"><option>URGENT</option><option>ACTION</option><option>INFO</option><option selected>RESOLVED</option><option>MONITOR</option></select></td><td><input type="text" name="ops4_title" placeholder="Item title (leave blank to omit)"></td><td><input type="text" name="ops4_notes" placeholder="Description / owner / deadline"></td></tr>
           </tbody>
         </table>
       </div>
@@ -283,66 +260,46 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
         </div>
       </div>
       <table>
-        <thead><tr><th colspan="2">AR aging</th>
-          <th style="text-align:right;width:22%">Amount</th>
-          <th style="text-align:right;width:16%">% of AR</th></tr></thead>
+        <thead><tr><th colspan="2">AR aging</th><th style="text-align:right;width:22%">Amount</th><th style="text-align:right;width:16%">% of AR</th></tr></thead>
         <tbody>
-          <tr><td style="width:14px;padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#29749C;"></span></td><td>0-30 days</td>
-            <td><input type="text" name="ar_030" placeholder="$0,000" style="text-align:right;"></td>
-            <td><input type="text" name="ar_030p" placeholder="##%" style="text-align:right;"></td></tr>
-          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#97C459;"></span></td><td>31-60 days</td>
-            <td><input type="text" name="ar_3160" placeholder="$0,000" style="text-align:right;"></td>
-            <td><input type="text" name="ar_3160p" placeholder="##%" style="text-align:right;"></td></tr>
-          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#EF9F27;"></span></td><td>61-90 days</td>
-            <td><input type="text" name="ar_6190" placeholder="$0,000" style="text-align:right;"></td>
-            <td><input type="text" name="ar_6190p" placeholder="##%" style="text-align:right;"></td></tr>
-          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#E24B4A;"></span></td><td>90+ days</td>
-            <td><input type="text" name="ar_90" placeholder="$0,000" style="text-align:right;"></td>
-            <td><input type="text" name="ar_90p" placeholder="##%" style="text-align:right;"></td></tr>
+          <tr><td style="width:14px;padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#29749C;"></span></td><td>0-30 days</td><td><input type="text" name="ar_030" placeholder="$0,000" style="text-align:right;"></td><td><input type="text" name="ar_030p" placeholder="##%" style="text-align:right;"></td></tr>
+          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#97C459;"></span></td><td>31-60 days</td><td><input type="text" name="ar_3160" placeholder="$0,000" style="text-align:right;"></td><td><input type="text" name="ar_3160p" placeholder="##%" style="text-align:right;"></td></tr>
+          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#EF9F27;"></span></td><td>61-90 days</td><td><input type="text" name="ar_6190" placeholder="$0,000" style="text-align:right;"></td><td><input type="text" name="ar_6190p" placeholder="##%" style="text-align:right;"></td></tr>
+          <tr><td style="padding:4px 4px 4px 8px;"><span class="ar-dot" style="background:#E24B4A;"></span></td><td>90+ days</td><td><input type="text" name="ar_90" placeholder="$0,000" style="text-align:right;"></td><td><input type="text" name="ar_90p" placeholder="##%" style="text-align:right;"></td></tr>
         </tbody>
       </table>
-      <div style="margin-top:8px;">
-        <label>Financial notes</label>
-        <textarea name="fin_notes" rows="2" placeholder="Any billing/collections context today. Or: No issues to report."></textarea>
-      </div>
+      <div style="margin-top:8px;"><label>Financial notes</label>
+        <textarea name="fin_notes" rows="2" placeholder="Any billing/collections context today. Or: No issues to report."></textarea></div>
     </div>
 
     <div class="section">
       <div class="stitle">Credentialing &nbsp;&middot;&nbsp; Billing &nbsp;&middot;&nbsp; Compliance</div>
       <div class="two-col">
-        <div>
-          <label>Credentialing</label>
-          <textarea name="cred" rows="2" placeholder="Active items -- provider, payer, status. Or: No active items."></textarea>
-        </div>
-        <div>
-          <label>Billing / Denials</label>
-          <textarea name="billing" rows="2" placeholder="Denial batches, appeal deadlines. Or: No active items."></textarea>
-        </div>
+        <div><label>Credentialing</label><textarea name="cred" rows="2" placeholder="Active items or: No active items."></textarea></div>
+        <div><label>Billing / Denials</label><textarea name="billing" rows="2" placeholder="Denial batches, appeal deadlines. Or: No active items."></textarea></div>
       </div>
-      <div style="margin-top:8px;">
-        <label>Compliance / AASM</label>
-        <textarea name="compliance" rows="2" placeholder="AASM accreditation, HIPAA, payer audits. Or: No active items."></textarea>
-      </div>
+      <div style="margin-top:8px;"><label>Compliance / AASM</label>
+        <textarea name="compliance" rows="2" placeholder="AASM accreditation, HIPAA, payer audits. Or: No active items."></textarea></div>
     </div>
 
     <div class="section">
       <div class="stitle">Forward look -- next 48-72 hours</div>
       <label>Known schedule risks</label>
-      <textarea name="fwd_risks" rows="2" placeholder="E.g.: Provider out Thursday -- coverage TBD. Or: None identified."></textarea>
+      <textarea name="fwd_risks" rows="2" placeholder="E.g.: Provider out Thursday. Or: None identified."></textarea>
       <label style="margin-top:8px;">Pending decisions needed</label>
-      <textarea name="fwd_pend" rows="2" placeholder="Items requiring leadership response -- who, what, by when. Or: None."></textarea>
+      <textarea name="fwd_pend" rows="2" placeholder="Items requiring leadership response. Or: None."></textarea>
       <label style="margin-top:8px;">Thursday tracker update</label>
-      <textarea name="fwd_track" rows="2" placeholder="Thursday: confirm tracker updated. Other days: Tracker update due Thursday."></textarea>
+      <textarea name="fwd_track" rows="2" placeholder="Thursday: confirm tracker updated. Other days: due Thursday."></textarea>
     </div>
 
     <div class="section">
       <div class="stitle">MSO / Operations notes <span style="font-weight:normal;font-style:italic;color:#bbb;">(leave blank to omit)</span></div>
-      <textarea name="mso_notes" rows="3" placeholder="Staffing, vendor, facility, payer, or Rhema management items. 2-4 sentences."></textarea>
+      <textarea name="mso_notes" rows="3" placeholder="Staffing, vendor, facility, payer, or Rhema management items."></textarea>
     </div>
 
     <div style="text-align:right;padding:8px 0 4px;">
       <button type="button" class="btn-reset" onclick="resetForNextDay()" style="margin-right:8px;">Reset</button>
-      <button type="submit" class="btn-submit" id="submit-btn2">&#9993;&nbsp; Submit &amp; Send</button>
+      <button type="submit" class="btn-submit">&#9993;&nbsp; Submit &amp; Send</button>
     </div>
 
   </div>
@@ -359,11 +316,263 @@ td input,td select,td textarea{padding:4px 6px;font-size:12px;min-height:28px}
 
 </div>
 <script>
+
+function buildEmailHTML(f) {
+  function v(name) {
+    var el = f[name];
+    if (!el) return '';
+    return (el.value || '').trim();
+  }
+  function row2(label, val) {
+    if (!val) return '';
+    return '<tr><td style="padding:5px 10px;font-size:11px;color:#888;font-family:Arial,sans-serif;width:35%;border-bottom:1px solid #F0F0F0;vertical-align:top;">' + label + '</td><td style="padding:5px 10px;font-size:12px;color:#222;font-family:Arial,sans-serif;border-bottom:1px solid #F0F0F0;vertical-align:top;">' + (val||'--') + '</td></tr>';
+  }
+  function section(title, accentColor, content) {
+    return '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">'
+      + '<tr><td style="padding:6px 0 4px;font-size:10px;font-weight:bold;color:'+accentColor+';font-family:Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid '+accentColor+';font-family:Arial,sans-serif;">'
+      + title + '</td></tr>'
+      + '<tr><td>' + content + '</td></tr>'
+      + '</table>';
+  }
+
+  var date        = v('report_date');
+  var status      = v('status');
+  var practiceName = v('practice');
+  var headline    = v('headline');
+  var volOff      = v('vol_office');
+  var volNP       = v('vol_np');
+  var volFU       = v('vol_fu');
+  var volOvnt     = v('vol_ovnt');
+  var volPct      = v('vol_pct');
+  var amNP=v('am_np'),amFU=v('am_fu'),amTot=v('am_total'),amPv=v('am_provider'),amN=v('am_notes');
+  var pmNP=v('pm_np'),pmFU=v('pm_fu'),pmTot=v('pm_total'),pmPv=v('pm_provider'),pmN=v('pm_notes');
+  var ovTot=v('ovnt_total'),ovType=v('ovnt_type');
+  var tmr=v('sched_tmr'),tmrN=v('sched_tmr_n');
+  var wtd=v('sched_wtd'),wtdN=v('sched_wtd_n');
+  var opn=v('sched_open'),opnN=v('sched_open_n');
+  var cx=v('sched_cx'),cxN=v('sched_cx_n');
+  var bmp=v('sched_bmp'),bmpN=v('sched_bmp_n');
+  var ton=v('sched_ton'),tonN=v('sched_ton_n');
+  var p1n=v('prov1_name'),p1s=v('prov1_status'),p1note=v('prov1_note');
+  var p2n=v('prov2_name'),p2s=v('prov2_status'),p2note=v('prov2_note');
+  var ops1b=v('ops1_badge'),ops1t=v('ops1_title'),ops1n=v('ops1_notes');
+  var ops2b=v('ops2_badge'),ops2t=v('ops2_title'),ops2n=v('ops2_notes');
+  var ops3b=v('ops3_badge'),ops3t=v('ops3_title'),ops3n=v('ops3_notes');
+  var ops4b=v('ops4_badge'),ops4t=v('ops4_title'),ops4n=v('ops4_notes');
+  var billed=v('fin_billed'),paid=v('fin_paid'),arTot=v('fin_ar');
+  var ar1=v('ar_030'),ar1p=v('ar_030p'),ar2=v('ar_3160'),ar2p=v('ar_3160p');
+  var ar3=v('ar_6190'),ar3p=v('ar_6190p'),ar4=v('ar_90'),ar4p=v('ar_90p');
+  var finN=v('fin_notes');
+  var cred=v('cred'),bill=v('billing'),comp=v('compliance');
+  var risks=v('fwd_risks'),pend=v('fwd_pend'),track=v('fwd_track');
+  var mso=v('mso_notes');
+
+  // Status badge color
+  var statusBg = status==='ALERT' ? '#FCEBEB' : status==='WATCH' ? '#FAEEDA' : '#EAF3DE';
+  var statusFg = status==='ALERT' ? '#791F1F' : status==='WATCH' ? '#633806' : '#27500A';
+
+  // Ops badge colors
+  function badgeStyle(b) {
+    var bg = b==='URGENT'?'#FCEBEB':b==='ACTION'?'#FAEEDA':b==='RESOLVED'?'#EAF3DE':b==='MONITOR'?'#F1EFE8':'#D6E8F2';
+    var fg = b==='URGENT'?'#791F1F':b==='ACTION'?'#633806':b==='RESOLVED'?'#27500A':b==='MONITOR'?'#444':'#0F2B37';
+    return 'display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:bold;background:'+bg+';color:'+fg+';font-family:Arial,sans-serif;';
+  }
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#f0f0f0;font-family:Arial,sans-serif;">'
+    + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f0f0;padding:20px 0;">'
+    + '<tr><td align="center"><table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background:#ffffff;">'
+
+    // Header
+    + '<tr><td style="background:#0F2B37;padding:0;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#29749C;height:5px;font-size:0;">&nbsp;</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding:16px 24px 14px;">'
+    + '<tr><td style="vertical-align:top;">'
+    + '<p style="margin:0;font-size:10px;color:#A8C8DC;letter-spacing:.07em;text-transform:uppercase;font-family:Arial,sans-serif;">Rhema Management Group</p>'
+    + '<p style="margin:4px 0 2px;font-size:18px;font-weight:bold;color:#fff;font-family:Arial,sans-serif;">' + practiceName + '</p>'
+    + '<p style="margin:0;font-size:11px;color:#A8C8DC;font-family:Arial,sans-serif;">End of Day Report</p>'
+    + '</td><td style="text-align:right;vertical-align:top;">'
+    + '<p style="margin:0;font-size:14px;font-weight:bold;color:#fff;font-family:Arial,sans-serif;">' + date + '</p>'
+    + '<p style="margin:5px 0 0;font-family:Arial,sans-serif;"><span style="' + badgeStyle(status) + '">' + status + '</span></p>'
+    + '</td></tr></table></td></tr>'
+
+    // Body
+    + '<tr><td style="padding:20px 24px;">'
+
+    // Headline
+    + (headline ? '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;background:#EAF3F9;border-left:4px solid #29749C;"><tr><td style="padding:10px 14px;font-size:13px;color:#0F2B37;line-height:1.6;font-family:Arial,sans-serif;">' + headline + '</td></tr></table>' : '')
+
+    // Volume metrics
+    + section('Today\'s Volume', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
+        + '<td width="19%" style="background:#D6E8F2;border-top:3px solid #29749C;padding:10px 6px;text-align:center;border-radius:0 0 3px 3px;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#29749C;text-transform:uppercase;font-family:Arial,sans-serif;">Office visits</p>'
+          + '<p style="margin:4px 0 0;font-size:22px;font-weight:bold;color:#0F2B37;font-family:Arial,sans-serif;">' + (volOff||'--') + '</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="19%" style="background:#D6E8F2;border-top:3px solid #29749C;padding:10px 6px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#29749C;text-transform:uppercase;font-family:Arial,sans-serif;">New patients</p>'
+          + '<p style="margin:4px 0 0;font-size:22px;font-weight:bold;color:#0F2B37;font-family:Arial,sans-serif;">' + (volNP||'--') + '</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="19%" style="background:#D6E8F2;border-top:3px solid #29749C;padding:10px 6px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#29749C;text-transform:uppercase;font-family:Arial,sans-serif;">Follow-ups</p>'
+          + '<p style="margin:4px 0 0;font-size:22px;font-weight:bold;color:#0F2B37;font-family:Arial,sans-serif;">' + (volFU||'--') + '</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="19%" style="background:#FAEEDA;border-top:3px solid #BA7517;padding:10px 6px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#BA7517;text-transform:uppercase;font-family:Arial,sans-serif;">Sleep/Ovnt</p>'
+          + '<p style="margin:4px 0 0;font-size:22px;font-weight:bold;color:#633806;font-family:Arial,sans-serif;">' + (volOvnt||'--') + '</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="17%" style="background:#F5F5F5;border-top:3px solid #999;padding:10px 6px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#888;text-transform:uppercase;font-family:Arial,sans-serif;">% Curr cap</p>'
+          + '<p style="margin:4px 0 0;font-size:22px;font-weight:bold;color:#444;font-family:Arial,sans-serif;">' + (volPct||'--') + '</p></td>'
+        + '</tr></table>')
+
+    // Session breakdown
+    + section('Session Breakdown', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:Arial,sans-serif;">'
+        + '<tr style="background:#EAF3F9;"><th style="padding:5px 8px;text-align:left;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">Session</th>'
+        + '<th style="padding:5px 8px;text-align:center;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">NP</th>'
+        + '<th style="padding:5px 8px;text-align:center;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">FU</th>'
+        + '<th style="padding:5px 8px;text-align:center;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">Total</th>'
+        + '<th style="padding:5px 8px;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">Provider</th>'
+        + '<th style="padding:5px 8px;color:#0F2B37;font-size:11px;border:1px solid #D6E8F2;">Notes</th></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Morning (AM)</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;">' + (amNP||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;">' + (amFU||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">' + (amTot||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;">' + (amPv||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">' + (amN||'--') + '</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Afternoon (PM)</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;">' + (pmNP||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;">' + (pmFU||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">' + (pmTot||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;">' + (pmPv||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">' + (pmN||'--') + '</td></tr>'
+        + 
+        + '<tr style="background:#F9F9F9;"><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Overnight studies</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;color:#bbb;">--</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;color:#bbb;">--</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">' + (ovTot||'--') + '</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#bbb;">--</td>'
+        + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">' + (ovType||'--') + '</td></tr>'
+        + '</table>')
+
+    // Scheduling pulse — 2 column layout
+    + section('Scheduling Pulse', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:Arial,sans-serif;">'
+        + '<tr style="background:#EAF3F9;"><th style="padding:5px 8px;text-align:left;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:38%">Metric</th>'
+        + '<th style="padding:5px 8px;text-align:center;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:12%">Count</th>'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;">Notes</th></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Tomorrow\'s visits</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(tmr||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(tmrN||'')+'</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Week to date</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(wtd||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(wtdN||'')+'</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Open slots (7 days)</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(opn||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(opnN||'')+'</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Cancellations</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(cx||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(cxN||'')+'</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Bumped / rescheduled</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(bmp||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(bmpN||'')+'</td></tr>'
+        + '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">Tonight\'s studies</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:center;font-weight:bold;">'+(ton||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(tonN||'')+'</td></tr>'
+        + '</table>')
+
+    // Provider status
+    + section('Provider Status', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:Arial,sans-serif;">'
+        + '<tr style="background:#EAF3F9;">'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:30%">Provider</th>'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:22%">Status</th>'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;">Note</th></tr>'
+        + (p1n ? '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;font-weight:bold;">'+(p1n||'--')+'</td>'
+          + '<td style="padding:5px 8px;border:1px solid #EAEFF3;"><span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:bold;background:'+(p1s==='In office'?'#EAF3DE':'#F1EFE8')+';color:'+(p1s==='In office'?'#27500A':'#555')+';">'+(p1s||'--')+'</span></td>'
+          + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(p1note||'--')+'</td></tr>' : '')
+        + (p2n ? '<tr><td style="padding:5px 8px;border:1px solid #EAEFF3;font-weight:bold;">'+(p2n||'--')+'</td>'
+          + '<td style="padding:5px 8px;border:1px solid #EAEFF3;"><span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:bold;background:'+(p2s==='In office'?'#EAF3DE':'#F1EFE8')+';color:'+(p2s==='In office'?'#27500A':'#555')+';">'+(p2s||'--')+'</span></td>'
+          + '<td style="padding:5px 8px;border:1px solid #EAEFF3;color:#666;">'+(p2note||'--')+'</td></tr>' : '')
+        + '</table>')
+
+    // Ops items — only non-empty ones
+    + (function() {
+        var ops = [[ops1b,ops1t,ops1n],[ops2b,ops2t,ops2n],[ops3b,ops3t,ops3n],[ops4b,ops4t,ops4n]].filter(function(o){return o[1];});
+        if (!ops.length) return '';
+        var rows = ops.map(function(o) {
+          return '<tr><td style="padding:6px 8px;border:1px solid #EAEFF3;width:12%;"><span style="'+badgeStyle(o[0])+'">'+o[0]+'</span></td>'
+            + '<td style="padding:6px 8px;border:1px solid #EAEFF3;font-weight:bold;color:#0F2B37;font-size:12px;">'+o[1]+'</td>'
+            + '<td style="padding:6px 8px;border:1px solid #EAEFF3;color:#555;font-size:12px;">'+(o[2]||'')+'</td></tr>';
+        }).join('');
+        return section('Operational Items', '#29749C',
+          '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:Arial,sans-serif;">'
+          + '<tr style="background:#EAF3F9;"><th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:12%">Priority</th>'
+          + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;width:36%">Item</th>'
+          + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;">Notes / Owner</th></tr>'
+          + rows + '</table>');
+      })()
+
+    // Financial summary
+    + section('Daily Financial Summary', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">'
+        + '<tr>'
+        + '<td width="32%" style="background:#D6E8F2;border-top:3px solid #29749C;padding:12px 8px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#29749C;text-transform:uppercase;font-family:Arial,sans-serif;">Billed today</p>'
+          + '<p style="margin:5px 0 2px;font-size:20px;font-weight:bold;color:#0F2B37;font-family:Arial,sans-serif;">'+(billed||'--')+'</p>'
+          + '<p style="margin:0;font-size:9px;color:#888;font-family:Arial,sans-serif;">Charges submitted</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="32%" style="background:#EAF3DE;border-top:3px solid #3B6D11;padding:12px 8px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#27500A;text-transform:uppercase;font-family:Arial,sans-serif;">Payments received</p>'
+          + '<p style="margin:5px 0 2px;font-size:20px;font-weight:bold;color:#173404;font-family:Arial,sans-serif;">'+(paid||'--')+'</p>'
+          + '<p style="margin:0;font-size:9px;color:#888;font-family:Arial,sans-serif;">Posted today</p></td>'
+        + '<td width="2%"></td>'
+        + '<td width="32%" style="background:#FAEEDA;border-top:3px solid #BA7517;padding:12px 8px;text-align:center;">'
+          + '<p style="margin:0;font-size:9px;font-weight:bold;color:#633806;text-transform:uppercase;font-family:Arial,sans-serif;">AR outstanding</p>'
+          + '<p style="margin:5px 0 2px;font-size:20px;font-weight:bold;color:#412402;font-family:Arial,sans-serif;">'+(arTot||'--')+'</p>'
+          + '<p style="margin:0;font-size:9px;color:#888;font-family:Arial,sans-serif;">Total open balance</p></td>'
+        + '</tr></table>'
+        + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:Arial,sans-serif;">'
+        + '<tr style="background:#EAF3F9;"><th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;" colspan="2">AR aging</th>'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;text-align:right;width:24%">Amount</th>'
+        + '<th style="padding:5px 8px;font-size:11px;color:#0F2B37;border:1px solid #D6E8F2;text-align:right;width:16%">% of AR</th></tr>'
+        + '<tr><td style="padding:5px 4px 5px 8px;border:1px solid #EAEFF3;width:12px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#29749C;"></span></td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">0-30 days</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar1||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar1p||'--')+'</td></tr>'
+        + '<tr><td style="padding:5px 4px 5px 8px;border:1px solid #EAEFF3;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#97C459;"></span></td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">31-60 days</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar2||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar2p||'--')+'</td></tr>'
+        + '<tr><td style="padding:5px 4px 5px 8px;border:1px solid #EAEFF3;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#EF9F27;"></span></td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">61-90 days</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar3||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar3p||'--')+'</td></tr>'
+        + '<tr><td style="padding:5px 4px 5px 8px;border:1px solid #EAEFF3;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#E24B4A;"></span></td><td style="padding:5px 8px;border:1px solid #EAEFF3;color:#444;">90+ days</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar4||'--')+'</td><td style="padding:5px 8px;border:1px solid #EAEFF3;text-align:right;">'+(ar4p||'--')+'</td></tr>'
+        + '</table>'
+        + (finN ? '<p style="margin:8px 0 0;font-size:12px;color:#444;font-family:Arial,sans-serif;"><strong>Notes:</strong> '+finN+'</p>' : ''))
+
+    // Credentialing / Billing / Compliance
+    + section('Credentialing &middot; Billing &middot; Compliance', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+        + row2('Credentialing', cred)
+        + row2('Billing / Denials', bill)
+        + row2('Compliance / AASM', comp)
+        + '</table>')
+
+    // Forward look
+    + section('Forward Look &mdash; Next 48-72 Hours', '#29749C',
+        '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+        + row2('Schedule risks', risks)
+        + row2('Pending decisions', pend)
+        + row2('Thursday tracker', track)
+        + '</table>')
+
+    // MSO notes
+    + (mso ? section('MSO / Operations Notes', '#29749C',
+        '<p style="font-size:12px;color:#444;line-height:1.6;font-family:Arial,sans-serif;margin:0;">'+mso+'</p>') : '')
+
+    + '</td></tr>'
+
+    // Footer
+    + '<tr><td style="background:#0F2B37;padding:0;">'
+    + '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#29749C;height:4px;font-size:0;">&nbsp;</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding:12px 24px;">'
+    + '<tr><td style="font-size:11px;color:#A8C8DC;line-height:1.7;font-family:Arial,sans-serif;">'
+    + '<strong style="color:#fff;">'+practiceName+'</strong><br>'
+    + 'MSO: Rhema Management Group &nbsp;&middot;&nbsp; AASM Accredited &nbsp;&middot;&nbsp; CONFIDENTIAL &mdash; Internal use only'
+    + '</td><td style="text-align:right;vertical-align:middle;font-size:10px;color:rgba(255,255,255,.3);font-family:Arial,sans-serif;">'+date+'</td></tr>'
+    + '</table></td></tr>'
+
+    + '</table></td></tr></table>'
+    + '</body></html>';
+
+  return html;
+}
+
+
 function setDate() {
   var now = new Date();
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var months = ['January','February','March','April','May','June',
-                'July','August','September','October','November','December'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var str = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
   document.getElementById('display-date').textContent = str;
   document.getElementById('report-date').value = str;
@@ -373,7 +582,10 @@ setDate();
 
 document.getElementById('eod-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  var btns = document.querySelectorAll('[type=submit]');
+  // Build HTML email and inject into hidden field before posting
+  document.getElementById('email-html-body').value = buildEmailHTML(this);
+
+  var btns = this.querySelectorAll('[type=submit]');
   btns.forEach(function(b) { b.textContent = 'Sending...'; b.disabled = true; });
   document.getElementById('error-banner').style.display = 'none';
 
@@ -395,10 +607,9 @@ document.getElementById('eod-form').addEventListener('submit', function(e) {
       btns.forEach(function(b) { b.innerHTML = '&#9993;&nbsp; Submit &amp; Send'; b.disabled = false; });
     }
   })
-  .catch(function(err) {
-    var eb = document.getElementById('error-banner');
-    eb.textContent = 'Network error. Check your connection and try again.';
-    eb.style.display = 'block';
+  .catch(function() {
+    document.getElementById('error-banner').textContent = 'Network error. Check your connection and try again.';
+    document.getElementById('error-banner').style.display = 'block';
     btns.forEach(function(b) { b.innerHTML = '&#9993;&nbsp; Submit &amp; Send'; b.disabled = false; });
   });
 });
