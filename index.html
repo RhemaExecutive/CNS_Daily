@@ -78,7 +78,7 @@ td input,td select{padding:4px 6px;font-size:12px;min-height:28px}
       </div>
       <div class="hdr-right">
         <div class="hdr-date" id="display-date"></div>
-        <div class="hdr-sub">End of Day Report</div>
+        <div class="hdr-sub">End of Day Report &mdash; Previous Day&#39;s Clinic</div>
       </div>
     </div>
     <div class="hdr-bar">
@@ -92,7 +92,7 @@ td input,td select{padding:4px 6px;font-size:12px;min-height:28px}
   </div>
 
   <div class="toolbar">
-    <span class="tb-info">Fill in fields below then click Submit &amp; Send.</span>
+    <span class="tb-info">This report covers <strong style="color:#fff;">yesterday&#39;s</strong> clinic activity. Fill in fields below then click Submit &amp; Send.</span>
     <button type="button" class="btn-reset" onclick="resetForNextDay()">Reset</button>
     <button type="button" class="btn-submit" id="submit-btn" onclick="submitReport()">&#9993;&nbsp; Submit &amp; Send</button>
   </div>
@@ -241,6 +241,7 @@ var SHORT       = 'CNS';
 
 function setDate() {
   var now = new Date();
+  now.setDate(now.getDate() - 1); // Report covers the previous day's clinic activity
   var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   REPORT_DATE = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
@@ -349,7 +350,7 @@ function buildEmail() {
     + '<p style="margin:3px 0 2px;font-size:17px;font-weight:bold;color:#fff;font-family:Arial,sans-serif;">' + PRACTICE + '</p>'
     + '<p style="margin:0;font-size:11px;color:#A8C8DC;font-family:Arial,sans-serif;">End of Day Report</p></td>'
     + '<td style="text-align:right;vertical-align:top;">'
-    + '<p style="margin:0;font-size:14px;font-weight:bold;color:#fff;font-family:Arial,sans-serif;">' + REPORT_DATE + '</p>'
+    + '<p style="margin:0;font-size:9px;color:#A8C8DC;text-transform:uppercase;letter-spacing:.05em;font-family:Arial,sans-serif;">Report for</p>'+ '<p style="margin:2px 0 0;font-size:14px;font-weight:bold;color:#fff;font-family:Arial,sans-serif;">' + REPORT_DATE + '</p>'
     + '<p style="margin:5px 0 0;"><span style="display:inline-block;padding:3px 10px;border-radius:3px;font-size:11px;font-weight:bold;font-family:Arial,sans-serif;background:' + sBg + ';color:' + sFg + ';">' + status + '</span></p>'
     + '</td></tr></table></td></tr>'
 
@@ -481,7 +482,7 @@ function submitReport() {
   document.getElementById('error-banner').style.display = 'none';
 
   var htmlBody = buildEmail();
-  var subject  = SHORT + ' EOD Report -- ' + REPORT_DATE;
+  var subject  = SHORT + ' EOD Report (Previous Day) -- ' + REPORT_DATE;
 
   emailjs.send('service_g1py9rj', 'template_w0zwzlj', {
     subject:   subject,
